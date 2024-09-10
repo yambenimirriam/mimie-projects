@@ -6,7 +6,6 @@ import {
   Menu,
   Package,
   Package2,
-  Search,
   ShoppingCart,
   Users,
 } from 'lucide-react';
@@ -30,31 +29,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Order from '@/components/ui/features/order';
-import { Input } from '@/components/ui/input';
+import SearchCard from '@/components/ui/features/search';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { z } from 'zod';
-
-export const description =
-  'A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.';
-
-const formSchema = z.object({
-  search: z.string(),
-});
 
 export default function Dashboard() {
-  const form = useForm<
-    z.infer<typeof formSchema>
-  >({
-    resolve: zodResolver(formSchema),
-    default: {
-      search: '',
-    },
-  });
   return (
     <div className='grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]'>
       <div className='hidden border-r bg-muted/40 md:block'>
@@ -237,16 +220,7 @@ export default function Dashboard() {
             </SheetContent>
           </Sheet>
           <div className='w-full flex-1'>
-            <form>
-              <div className='relative'>
-                <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
-                <Input
-                  type='search'
-                  placeholder='Search products...'
-                  className='w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3'
-                />
-              </div>
-            </form>
+            <SearchCard />
           </div>
           <ModeToggle />
           <DropdownMenu>
@@ -287,21 +261,22 @@ export default function Dashboard() {
     </div>
   );
 }
-function useForm<T>(arg0: {
-  resolve: any;
-  default: { search: string };
-}) {
-  throw new Error('Function not implemented.');
-}
+// function useForm<T>(arg0: {
+//   resolve: unknown;
+//   default: { search: string };
+// }) {
+//   throw new Error('Function not implemented.');
+// }
 
-function zodResolver(
-  formSchema: z.ZodObject<
-    { search: z.ZodString },
-    'strip',
-    z.ZodTypeAny,
-    { search: string },
-    { search: string }
-  >
-) {
-  throw new Error('Function not implemented.');
-}
+// function zodResolver(
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//   _formSchema: z.ZodObject<
+//     { search: z.ZodString },
+//     'strip',
+//     z.ZodTypeAny,
+//     { search: string },
+//     { search: string }
+//   >
+// ) {
+//   throw new Error('Function not implemented.');
+// }
